@@ -7,6 +7,8 @@ public class ImageTracking : MonoBehaviour
 {
     public GameObject[] prefabs;
 
+    [SerializeField] SliderManager sliderManager_;
+
     ARTrackedImageManager aRTrackedImageManager;
     Dictionary<string, GameObject> images2prefabs = new Dictionary<string, GameObject>();
 
@@ -18,6 +20,7 @@ public class ImageTracking : MonoBehaviour
             _prefab.name = prefab.name;
             _prefab.SetActive(false);
             images2prefabs.Add(_prefab.name, _prefab);
+            sliderManager_.initModel(_prefab);
         }
     }
 
@@ -44,6 +47,7 @@ public class ImageTracking : MonoBehaviour
     private void TrackedImageUpdate(ARTrackedImage image) {
         GameObject _prefab = images2prefabs[image.referenceImage.name];
         _prefab.transform.position = image.transform.position;
+        _prefab.transform.rotation = Quaternion.identity;
         _prefab.SetActive(true);
     }
 
