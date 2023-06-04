@@ -28,7 +28,7 @@ public class DatabaseManagement : MonoBehaviour
     }
 
     public void CreateUser() {
-        User newUser = new User(username.text, fullname.text, email.text, password.text, userID);
+        User newUser = new User(username.text, fullname.text, email.text, userID);
         string json = JsonUtility.ToJson(newUser);
         dbReference.Child("users").Child(userID).SetRawJsonValueAsync(json);
     }

@@ -1,16 +1,14 @@
 public class User
 {
-    private string username;
-    private string fullname;
-    private string email;
-    private string password;
-    private string uid;
+    public string username;
+    public string fullname;
+    public string email;
+    public string uid;
 
-    public User(string username, string fullname, string email, string password, string uid) {
+    public User(string username, string fullname, string email, string uid) {
         this.username = username;
         this.fullname = fullname;
         this.email = email;
-        this.password = password;
         this.uid = uid;
     }
 }
