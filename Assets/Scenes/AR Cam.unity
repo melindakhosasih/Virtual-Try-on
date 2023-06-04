@@ -791,3 +791,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 4031001124303855204, guid: 2bca9c5c87429694d94cbdc39509d977, type: 3}
+  sliderManager_: {fileID: 0}
