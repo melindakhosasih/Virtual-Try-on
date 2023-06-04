@@ -63,4 +63,19 @@ public class AuthManagement : MonoBehaviour
             Debug.LogError("Error creating user: " + error.Message);
         }
     }
+
+    public Task login() {
+        return auth.SignInWithEmailAndPasswordAsync(email.text, password.text);
+    }
+
+    public async void handleLogin() {
+        try {
+            await login();
+            user = auth.CurrentUser;
+            Debug.LogFormat("User signed in successfully: {0} ({1})", user.DisplayName, user.UserId);
+            SceneManager.LoadScene("Catalogue");
+        } catch (System.Exception error) {
+            Debug.LogError("Error login: " + error.Message);
+        }
+    }
 }
