@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Firebase;
 using Firebase.Auth;
 
@@ -11,8 +13,10 @@ public class AuthManagement : MonoBehaviour
     public InputField fullname;
     public InputField email;
     public InputField password;
+    private string userID;
     public DatabaseManagement database;
     private FirebaseAuth auth;
+    private FirebaseUser user;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,24 +30,37 @@ public class AuthManagement : MonoBehaviour
         
     }
 
-    public void createUser() {
-        auth.CreateUserWithEmailAndPasswordAsync(email.text, password.text).ContinueWith(task => {
-            if (task.IsCanceled) {
-                Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
-                return;
-            }
-            if (task.IsFaulted) {
-                Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
-                return;
-            }
+    private Task<Firebase.Auth.AuthResult> createAccount() {
+        return auth.CreateUserWithEmailAndPasswordAsync(email.text, password.text);
+    }
 
-            // Firebase user has been created.
-            Firebase.Auth.AuthResult result = task.Result;
-            Debug.LogFormat("Firebase user created successfully: {0} ({1})", result.User.DisplayName, result.User.UserId);
-            
-            User newUser = new User(username.text, fullname.text, email.text, result.User.UserId);
-            string json = JsonUtility.ToJson(newUser);
-            database.CreateUser(result.User.UserId, json);
-        });
+    private Task setProfile() {
+        user = auth.CurrentUser;
+        if (user != null) {
+            UserProfile profile = new UserProfile {
+                DisplayName = fullname.text
+            };
+            return user.UpdateUserProfileAsync(profile);;
+        }
+        return null;
+    }
+
+    private void storeProfileInfo() {
+        User newUser = new User(username.text, fullname.text, email.text, userID);
+        string json = JsonUtility.ToJson(newUser);
+        database.CreateUser(userID, json);
+    }
+
+    public async void createUser() {
+        try {
+            AuthResult result = await createAccount();
+            userID = result.User.UserId;
+            Debug.LogFormat("Firebase user created successfully: {0} ({1})", result.User.DisplayName, userID);
+            await setProfile();
+            storeProfileInfo();
+            SceneManager.LoadScene("Reg_Succcess");
+        } catch (System.Exception error) {
+            Debug.LogError("Error creating user: " + error.Message);
+        }
     }
 }
