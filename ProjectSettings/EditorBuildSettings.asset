@@ -6,10 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Account.unity
-    guid: 10b0a26d81090eb43a0a7c82113c6306
+    path: Assets/Scenes/Register.unity
+    guid: 71189397de7920a4c9daa54e31dec30a
   - enabled: 1
-    path: Assets/Scenes/AR Cam.unity
+    path: Assets/Scenes/Reg_Succcess.unity
+    guid: d1d6e6f9c8674e74e9d9dc1e27b140ee
+  - enabled: 1
+    path: Assets/Scenes/ArCam.unity
     guid: a109dcb9c1239e942906123e6f101327
   - enabled: 1
     path: Assets/Scenes/ArCam.unity
