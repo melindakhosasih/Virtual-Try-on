@@ -976,7 +976,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1023446186}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2133135432}
+        m_TargetAssemblyTypeName: ChangeScreen, Assembly-CSharp
+        m_MethodName: MoveToScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Login
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1023446186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1192,7 +1204,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1871663323}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2133135432}
+        m_TargetAssemblyTypeName: ChangeScreen, Assembly-CSharp
+        m_MethodName: MoveToScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Registration
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1871663323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1243,6 +1267,7 @@ GameObject:
   - component: {fileID: 2133135430}
   - component: {fileID: 2133135429}
   - component: {fileID: 2133135428}
+  - component: {fileID: 2133135432}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1335,3 +1360,15 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2133135432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133135427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250502d0789adb34b830de551c11cbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

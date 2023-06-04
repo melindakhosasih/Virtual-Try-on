@@ -6,8 +6,38 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ArCam.unity
+    path: Assets/Scenes/Homepage.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: 8d893345a509e204a866b7a2714dec66
+  - enabled: 1
+    path: Assets/Scenes/Reg_Succcess.unity
+    guid: d1d6e6f9c8674e74e9d9dc1e27b140ee
+  - enabled: 1
+    path: Assets/Scenes/Catalogue.unity
+    guid: 4adca41466aa86640a2eaa60f82b5060
+  - enabled: 1
+    path: Assets/Scenes/Account.unity
+    guid: 10b0a26d81090eb43a0a7c82113c6306
+  - enabled: 1
+    path: Assets/Scenes/Item Details/Item 1.unity
+    guid: 94192f8d3db1a424ead460c6af880540
+  - enabled: 1
+    path: Assets/Scenes/Item Details/Item 2.unity
+    guid: a135a2903849b4243b8a0fb43373f5d0
+  - enabled: 1
+    path: Assets/Scenes/Registration.unity
+    guid: efd887ae311eee842848c57f65fe6005
+  - enabled: 1
+    path: Assets/Scenes/AR Cam.unity
     guid: a109dcb9c1239e942906123e6f101327
+  - enabled: 1
+    path: Assets/Scenes/Cart.unity
+    guid: c862aacdbbef44345a7b4226220f2cd6
+  - enabled: 1
+    path: Assets/Scenes/Purchase_Complete.unity
+    guid: c260fef4396a9914a8af2405cf66dfd3
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 667a62422bb39394aa621c6cb8ecf3a0, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 52cd39c5d95cc1e488b64e9f545b1d9f, type: 2}
