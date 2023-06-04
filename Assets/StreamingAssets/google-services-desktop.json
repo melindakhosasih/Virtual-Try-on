@@ -2,7 +2,8 @@
   "project_info": {
     "project_number": "799724916816",
     "project_id": "a-watch",
-    "storage_bucket": "a-watch.appspot.com"
+    "storage_bucket": "a-watch.appspot.com",
+    "firebase_url": "https://a-watch-default-rtdb.firebaseio.com/"
   },
   "client": [
     {
