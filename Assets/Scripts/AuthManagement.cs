@@ -9,10 +9,15 @@ using Firebase.Auth;
 
 public class AuthManagement : MonoBehaviour
 {
+    public enum Mode {
+        Read,
+        Write
+    };
     public InputField username;
     public InputField fullname;
     public InputField email;
     public InputField password;
+    public Mode mode;
     private string userID;
     public DatabaseManagement database;
     private FirebaseAuth auth;
@@ -20,8 +25,12 @@ public class AuthManagement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        password.contentType = InputField.ContentType.Password;
         auth = FirebaseAuth.DefaultInstance;
+        if (mode == Mode.Read) {
+            loadUserProfile();
+        } else {
+            password.contentType = InputField.ContentType.Password;
+        }
     }
 
     // Update is called once per frame
@@ -76,6 +85,17 @@ public class AuthManagement : MonoBehaviour
             SceneManager.LoadScene("Catalogue");
         } catch (System.Exception error) {
             Debug.LogError("Error login: " + error.Message);
+        }
+    }
+
+    private async void loadUserProfile() {
+        user = auth.CurrentUser;
+        email.text = user.Email;
+        fullname.text = user.DisplayName;
+        var usernameData = await database.getUserInfos("username", user.UserId);
+        print(usernameData);
+        if(usernameData != null) {
+            username.text = usernameData.Value.ToString();
         }
     }
 }

@@ -1269,6 +1269,7 @@ MonoBehaviour:
   fullname: {fileID: 0}
   email: {fileID: 808357172}
   password: {fileID: 436078673}
+  mode: 1
   database: {fileID: 0}
 --- !u!4 &788480986
 Transform:
