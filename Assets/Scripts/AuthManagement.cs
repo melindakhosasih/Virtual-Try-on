@@ -93,7 +93,6 @@ public class AuthManagement : MonoBehaviour
         email.text = user.Email;
         fullname.text = user.DisplayName;
         var usernameData = await database.getUserInfos("username", user.UserId);
-        print(usernameData);
         if(usernameData != null) {
             username.text = usernameData.Value.ToString();
         }

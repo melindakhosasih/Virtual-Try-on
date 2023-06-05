@@ -29,15 +29,7 @@ public class DatabaseManagement : MonoBehaviour
     }
 
     public async Task<DataSnapshot> getUserInfos(string info, string uid) {
-            // print(dbReference.Child("users").Child(uid).Child(info).GetValueAsync().Value.ToString());
-            print(dbReference.Child("users").Child(uid).Child(info).GetValueAsync().ToString());
-        // try {
-            return await dbReference.Child("users").Child(uid).Child(info).GetValueAsync();
-        // }
-        // catch (Exception e) {
-        //     // Handle the error or log the exception
-        //     Debug.LogError($"Error getting user info: {e.Message}");
-        //     return null;
-        // }
+        dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+        return await dbReference.Child("users").Child(uid).Child(info).GetValueAsync();
     }
 }
