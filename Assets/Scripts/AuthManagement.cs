@@ -88,6 +88,15 @@ public class AuthManagement : MonoBehaviour
         }
     }
 
+    public void handleSignOut() {
+        auth = FirebaseAuth.DefaultInstance;
+        user = auth.CurrentUser;
+        if (auth != null && user != null) {
+            auth.SignOut();
+            SceneManager.LoadScene("Homepage");
+        }
+    }
+
     private async void loadUserProfile() {
         user = auth.CurrentUser;
         email.text = user.Email;
