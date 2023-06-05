@@ -25,10 +25,25 @@ public class ARManager : MonoBehaviour
         Vector3.zero,
         Vector3.zero
     };
+    private Vector3[] localPosition_ = {
+        Vector3.zero,
+        Vector3.zero,
+        Vector3.zero,
+        Vector3.zero,
+        Vector3.zero,
+        Vector3.zero,
+        Vector3.zero,
+        Vector3.zero,
+        Vector3.zero,
+        Vector3.zero
+    };
 
-    [SerializeField] SliderManager sliderManager_;
+    [SerializeField] SliderManager sliderScaleManager_;
+    [SerializeField] SliderManager sliderRotateManager_;
+    [SerializeField] private Text modelScale;
 
     private int currentModelNum = 1;
+    private GameObject model_;
 
     ARTrackedImageManager aRTrackedImageManager;
     Dictionary<string, GameObject> images2prefabs = new Dictionary<string, GameObject>();
@@ -44,6 +59,7 @@ public class ARManager : MonoBehaviour
             _prefab.SetActive(false);
             images2prefabs.Add(_prefab.name, _prefab);
             localScale_[currentModelNum-1] = prefab.transform.localScale;
+            localPosition_[currentModelNum-1] = prefab.transform.position;
             currentModelNum += 1;
         }
         currentModelNum = 1;
@@ -56,12 +72,14 @@ public class ARManager : MonoBehaviour
             if(currentModelNum>2){
                 currentModelNum = 1;
             }
-            sliderManager_.initModel(images2prefabs["watch"+currentModelNum.ToString()]);
+            sliderScaleManager_.initModel(images2prefabs["watch"+currentModelNum.ToString()]);
+            sliderRotateManager_.initModel(images2prefabs["watch"+currentModelNum.ToString()]);
             btnText.text = currentModelNum.ToString();
         });
 
         aRTrackedImageManager = FindObjectOfType<ARTrackedImageManager>();
-        sliderManager_.initModel(images2prefabs["watch"+currentModelNum.ToString()]);
+        sliderScaleManager_.initModel(images2prefabs["watch"+currentModelNum.ToString()]);
+        sliderRotateManager_.initModel(images2prefabs["watch"+currentModelNum.ToString()]);
 
     }
 
@@ -75,28 +93,40 @@ public class ARManager : MonoBehaviour
 
     private void ImagesChanged(ARTrackedImagesChangedEventArgs args) {
         foreach(ARTrackedImage trackedImage in args.added){
-            TrackedImageUpdate(trackedImage);
+            TrackedImageUpdate(trackedImage, "added");
         }
         foreach(ARTrackedImage trackedImage in args.updated){
-            TrackedImageUpdate(trackedImage);
+            TrackedImageUpdate(trackedImage, "updated");
         }
         foreach(ARTrackedImage trackedImage in args.removed){
             TrackedImageRemove(trackedImage);
         }
     }
 
-    private void TrackedImageUpdate(ARTrackedImage image) {
-        GameObject _prefab = images2prefabs[image.referenceImage.name+currentModelNum.ToString()];
-        _prefab.transform.position = image.transform.position;
-        _prefab.transform.localScale = _prefab.transform.localScale;
-        // _prefab.transform.position = image.transform.position + new Vector3(0, _prefab.transform.position.y, _prefab.transform.position.z);
-        // _prefab.transform.rotation = Quaternion.identity*_prefab.transform.rotation;
-        _prefab.transform.rotation = _prefab.transform.rotation;
-        _prefab.SetActive(true);
-        // btnText.text = btnText.text + _prefab.transform.position;
+    private void TrackedImageUpdate(ARTrackedImage image, string state) {
+            // GameObject _prefab = images2prefabs[image.referenceImage.name+currentModelNum.ToString()];
+            // _prefab.transform.position = image.transform.position;
+            images2prefabs["watch"+currentModelNum.ToString()].transform.localScale = images2prefabs["watch"+currentModelNum.ToString()].transform.localScale;
+            images2prefabs["watch"+currentModelNum.ToString()].transform.position = image.transform.position;
+            // images2prefabs["watch"+currentModelNum.ToString()].transform.position = image.transform.position + localPosition_[currentModelNum-1];
+            if(state == "added"){
+                images2prefabs["watch"+currentModelNum.ToString()].transform.rotation = images2prefabs["watch"+currentModelNum.ToString()].transform.rotation;
+            }
+            // _prefab.transform.rotation = Quaternion.identity*_prefab.transform.rotation;
+            images2prefabs["watch"+currentModelNum.ToString()].SetActive(true);
+            // btnText.text = btnText.text + _prefab.transform.position;
     }
 
     private void TrackedImageRemove(ARTrackedImage image) {
-        images2prefabs[image.name+currentModelNum].SetActive(false);
+        images2prefabs["watch"+currentModelNum.ToString()].SetActive(false);
+    }
+
+    void Update(){
+        model_ = images2prefabs["watch"+currentModelNum.ToString()];
+        modelScale.text = model_.transform.localScale.ToString("0.00") + '\n' +
+                          model_.transform.rotation.ToString("") + '\n' + 
+                          " watch" + currentModelNum.ToString() + '\n' +
+                          model_.transform.position.ToString("0.00") + '\n' +
+                          localPosition_[currentModelNum-1].ToString("0.00");
     }
 }
