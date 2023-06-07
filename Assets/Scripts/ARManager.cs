@@ -69,7 +69,7 @@ public class ARManager : MonoBehaviour
         btn.onClick.AddListener(()=>{
             images2prefabs["watch"+currentModelNum.ToString()].SetActive(false);
             currentModelNum += 1;
-            if(currentModelNum>2){
+            if(currentModelNum > 9){
                 currentModelNum = 1;
             }
             sliderScaleManager_.initModel(images2prefabs["watch"+currentModelNum.ToString()]);
@@ -114,7 +114,6 @@ public class ARManager : MonoBehaviour
             }
             // _prefab.transform.rotation = Quaternion.identity*_prefab.transform.rotation;
             images2prefabs["watch"+currentModelNum.ToString()].SetActive(true);
-            // btnText.text = btnText.text + _prefab.transform.position;
     }
 
     private void TrackedImageRemove(ARTrackedImage image) {
