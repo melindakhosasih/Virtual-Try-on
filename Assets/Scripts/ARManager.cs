@@ -44,6 +44,7 @@ public class ARManager : MonoBehaviour
 
     private int currentModelNum = 1;
     private GameObject model_;
+    private int tempCurrentModelNum;
 
     ARTrackedImageManager aRTrackedImageManager;
     Dictionary<string, GameObject> images2prefabs = new Dictionary<string, GameObject>();
@@ -53,6 +54,12 @@ public class ARManager : MonoBehaviour
     }
 
     private void Awake() {
+        if(PlayerPrefs.GetInt("watchNum") != 0){
+            tempCurrentModelNum = PlayerPrefs.GetInt("watchNum");
+            currentModelNum = tempCurrentModelNum;
+        } else{
+            tempCurrentModelNum = 1;
+        }
         foreach(GameObject prefab in prefabs) {
             GameObject _prefab = Instantiate(prefab, prefab.transform.position, prefab.transform.rotation);
             _prefab.name = prefab.name;
@@ -62,7 +69,7 @@ public class ARManager : MonoBehaviour
             localPosition_[currentModelNum-1] = prefab.transform.position;
             currentModelNum += 1;
         }
-        currentModelNum = 1;
+        currentModelNum = tempCurrentModelNum;
 
         btn = btnObj.GetComponent<Button>();
         btnText = btnTextObj.GetComponent<Text>();
