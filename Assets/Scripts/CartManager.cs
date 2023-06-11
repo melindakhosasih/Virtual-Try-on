@@ -45,6 +45,21 @@ public class CartManager : MonoBehaviour
         }
     }
 
+    public async void Purchase() {
+        foreach (Transform child in cartItemsParent) {
+            Transform childObject = child.transform.Find("CheckBox");
+            bool toggle = childObject.gameObject.GetComponent<Toggle>().isOn;
+            if (toggle) {
+                string productName = child.transform.Find("Product Info").Find("Product Name").GetComponent<TextMeshProUGUI>().text;
+                print(productName);
+                ClearCart(productName);
+            }
+        }
+        // if(cartLists != null) {
+        //     ClearCart(itemIdx);
+        // }
+    }
+
     private async void loadItems() {
         auth = FirebaseAuth.DefaultInstance;
         user = auth.CurrentUser;
@@ -60,6 +75,20 @@ public class CartManager : MonoBehaviour
             if(itemIdx == itemName.Key) {
                 var amount = int.Parse(itemName.Value.ToString());
                 amount += 1;
+                itemName.Reference.SetValueAsync(amount);
+                database.updateInfo(user.UserId, JsonUtility.ToJson(cartLists));
+                return;
+            }
+        }
+    }
+
+    private async void ClearCart(string itemIdx) {
+        cartLists = await database.getUserInfos("carts", user.UserId);
+        foreach (DataSnapshot itemName in cartLists.Children)
+        {
+            if(itemIdx == itemName.Key) {
+                var amount = int.Parse(itemName.Value.ToString());
+                amount = 0;
                 itemName.Reference.SetValueAsync(amount);
                 database.updateInfo(user.UserId, JsonUtility.ToJson(cartLists));
                 return;
