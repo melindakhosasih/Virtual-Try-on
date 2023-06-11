@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Firebase;
 using Firebase.Auth;
+using Newtonsoft.Json;
 
 public class AuthManagement : MonoBehaviour
 {
@@ -56,7 +57,7 @@ public class AuthManagement : MonoBehaviour
 
     private void storeProfileInfo() {
         User newUser = new User(username.text, fullname.text, email.text, userID);
-        string json = JsonUtility.ToJson(newUser);
+        string json = JsonConvert.SerializeObject(newUser, Formatting.Indented);
         database.CreateUser(userID, json);
     }
 
