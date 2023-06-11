@@ -56,7 +56,6 @@ public class ARManager : MonoBehaviour
     private void Awake() {
         if(PlayerPrefs.GetInt("watchNum") != 0){
             tempCurrentModelNum = PlayerPrefs.GetInt("watchNum");
-            currentModelNum = tempCurrentModelNum;
         } else{
             tempCurrentModelNum = 1;
         }
@@ -116,9 +115,11 @@ public class ARManager : MonoBehaviour
             images2prefabs["watch"+currentModelNum.ToString()].transform.localScale = images2prefabs["watch"+currentModelNum.ToString()].transform.localScale;
             images2prefabs["watch"+currentModelNum.ToString()].transform.position = image.transform.position;
             // images2prefabs["watch"+currentModelNum.ToString()].transform.position = image.transform.position + localPosition_[currentModelNum-1];
-            if(state == "added"){
-                images2prefabs["watch"+currentModelNum.ToString()].transform.rotation = images2prefabs["watch"+currentModelNum.ToString()].transform.rotation;
-            }
+            // if(state == "added"){
+            // }
+            images2prefabs["watch"+currentModelNum.ToString()].transform.rotation = images2prefabs["watch"+currentModelNum.ToString()].transform.rotation;
+            // images2prefabs["watch"+currentModelNum.ToString()].transform.rotation = Quaternion.Euler(images2prefabs["watch"+currentModelNum.ToString()].transform.rotation.x, 0, 0);
+            // initialModelRotation*Quaternion.Euler(v, 0, 0);
             // _prefab.transform.rotation = Quaternion.identity*_prefab.transform.rotation;
             images2prefabs["watch"+currentModelNum.ToString()].SetActive(true);
     }
@@ -134,5 +135,9 @@ public class ARManager : MonoBehaviour
                           " watch" + currentModelNum.ToString() + '\n' +
                           model_.transform.position.ToString("0.00") + '\n' +
                           localPosition_[currentModelNum-1].ToString("0.00");
+    }
+
+    public void SetToFalse(){
+        images2prefabs["watch"+currentModelNum.ToString()].SetActive(false);
     }
 }
