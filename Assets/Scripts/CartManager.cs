@@ -27,13 +27,13 @@ public class CartManager : MonoBehaviour
     private Dictionary<string, string> keyValuePairs = new Dictionary<string, string>() {
         {"1", "Apple Watch Series 7"},
         {"2", "Apple Watch Series 8"},
-        {"3", "Digital Watch"},
-        {"4", "Hand Watch High Poly"},
+        {"3", "Casio WR100M"},
+        {"4", "High Poly Hand Watch"},
         {"5", "Seiko Coutura Watch"},
         {"6", "Smart Watch KW 19"},
         {"7", "Rolex Daytona"},
-        {"8", "Watch Test"},
-        {"9", "Wrist Watch"},
+        {"8", "Tag HEUER Carerra"},
+        {"9", "Original Smart Watch"},
     };
     public Mode mode;
 
