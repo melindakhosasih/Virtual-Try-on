@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Firebase;
 using Firebase.Database;
 using static Firebase.Extensions.TaskExtension;
+using Newtonsoft.Json;
 
 
 public class DatabaseManagement : MonoBehaviour
@@ -26,6 +27,11 @@ public class DatabaseManagement : MonoBehaviour
 
     public void CreateUser(string userID, string json) {
         dbReference.Child("users").Child(userID).SetRawJsonValueAsync(json);
+    }
+    
+    public void updateInfo(string userID, string json) {
+        Dictionary<string, object> data = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+        dbReference.Child("users").Child(userID).UpdateChildrenAsync(data);
     }
 
     public async Task<DataSnapshot> getUserInfos(string info, string uid) {

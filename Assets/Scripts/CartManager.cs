@@ -23,34 +23,51 @@ public class CartManager : MonoBehaviour
     public DatabaseManagement database;
     private FirebaseAuth auth;
     private FirebaseUser user;
+    private DataSnapshot cartLists;
     public Mode mode;
 
     // private List<Item> cartItems;
 
-    void Start()
-    {
+    void Start() {
         auth = FirebaseAuth.DefaultInstance;
         user = auth.CurrentUser;
         if (mode == Mode.Both) {
             loadItems();
         }
     }
-    // public void AddToCart(string itemName)
-    // {
-    //     cartItems.Add(itemName);
-    //     UpdateCartUI();
-    // }
+
+    public async void AddToCart(string itemIdx) {
+        auth = FirebaseAuth.DefaultInstance;
+        user = auth.CurrentUser;
+        cartLists = await database.getUserInfos("carts", user.UserId);
+        if(cartLists != null) {
+            UpdateCartInfo(itemIdx);
+        }
+    }
 
     private async void loadItems() {
         auth = FirebaseAuth.DefaultInstance;
         user = auth.CurrentUser;
-        var userCartLists = await database.getUserInfos("carts", user.UserId);
-        if(userCartLists != null) {
-            UpdateCartUI(userCartLists);
+        cartLists = await database.getUserInfos("carts", user.UserId);
+        if(cartLists != null) {
+            UpdateCartUI();
         }
     }
 
-    private void UpdateCartUI(DataSnapshot cartLists)
+    private void UpdateCartInfo(string itemIdx) {
+        foreach (DataSnapshot itemName in cartLists.Children)
+        {
+            if(itemIdx == itemName.Key) {
+                var amount = int.Parse(itemName.Value.ToString());
+                amount += 1;
+                itemName.Reference.SetValueAsync(amount);
+                database.updateInfo(user.UserId, JsonUtility.ToJson(cartLists));
+                return;
+            }
+        }
+    }
+
+    private void UpdateCartUI()
     {
         // Clear existing cart items
         foreach (Transform child in cartItemsParent)
