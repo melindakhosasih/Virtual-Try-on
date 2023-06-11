@@ -6,14 +6,14 @@ public class User
     public string fullname;
     public string email;
     public string uid;
-    public Dictionary<string, string> carts;
+    public Dictionary<string, int> carts;
 
     public User(string username, string fullname, string email, string uid) {
         this.username = username;
         this.fullname = fullname;
         this.email = email;
         this.uid = uid;
-        this.carts = new Dictionary<string, string>() {
+        this.carts = new Dictionary<string, int>() {
             {"1", 0},
             {"2", 0},
             {"3", 0},
