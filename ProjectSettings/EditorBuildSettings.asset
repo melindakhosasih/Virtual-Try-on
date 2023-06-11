@@ -36,7 +36,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Register.unity
     guid: 7daefb4fa5e9ae74583f1764fa0db7f6
   - enabled: 1
-    path: Assets/Scenes/Item Details/Bausele Oceanmoon.unity
+    path: Assets/Scenes/Item Details/Smart.unity
     guid: 5cb35de5c6567794b9e4c2edcd193e43
   - enabled: 1
     path: Assets/Scenes/Item Details/Rolex.unity
@@ -50,6 +50,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Item Details/Series 8.unity
     guid: a135a2903849b4243b8a0fb43373f5d0
+  - enabled: 1
+    path: Assets/Scenes/Item Details/Carrera.unity
+    guid: 32441f4b8e826aa4d8037b71023273f8
+  - enabled: 1
+    path: Assets/Scenes/Item Details/Casio.unity
+    guid: a08e0d91a2ada6b4087f63291b11bbb8
+  - enabled: 1
+    path: Assets/Scenes/Item Details/KW.unity
+    guid: 1bdcaaa534ac56f4cacdb09edd0ef3da
+  - enabled: 1
+    path: Assets/Scenes/Item Details/Poly.unity
+    guid: 526b3bc6646ccb44dad1e687d0bb7565
   - enabled: 1
     path: Assets/Scenes/Account.unity
     guid: 10b0a26d81090eb43a0a7c82113c6306
